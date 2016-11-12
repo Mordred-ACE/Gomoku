@@ -10,17 +10,18 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 public class Panel extends JPanel{
-	private static final int tilesX = 19;
+	private static final int tilesX = 19;  //tiles on the board
 	private static final int tilesY = 19;
-	private static final int sizeX = tilesX*50;
+	
+	private static final int sizeX = tilesX*50; //size of the board
 	private static final int sizeY = tilesY*50;
-	private static boolean turn = true;
+	private static boolean turn = true;  
 	private static boolean gameWon = false;
-	private Board boardContent;
+	private Board boardContent; //encapsulates the board
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Panel panel = new Panel();
+		// TODO Auto-generated method stub 
+		Panel panel = new Panel();   //create window
 		JFrame window = new JFrame("Noughts and Crosses");
 
 		window.setContentPane(panel);
@@ -34,7 +35,7 @@ public class Panel extends JPanel{
 	
 	public Panel() {
 		
-		setLayout(null);
+		setLayout(null);    //constructor of the class, creates and adds content to the window
 		boardContent = new Board(tilesX,tilesY,sizeX,sizeY);
 		boardContent.addMouseListener( new CheckMove() );
 		add(boardContent);
@@ -45,9 +46,9 @@ public class Panel extends JPanel{
 		restartButton.setBounds(sizeX,10,120,30);
 		restartButton.addActionListener(new ActionListener() {
 			
-			public void actionPerformed( ActionEvent evt ) {
+			public void actionPerformed( ActionEvent evt ) { //listener for "New Game" button, resets board
 				
-				gameWon = false; turn = true; // White always starts.
+				gameWon = false; turn = true; 
 				boardContent.setBoard();
 				repaint();
 			}
@@ -55,8 +56,11 @@ public class Panel extends JPanel{
 
 	}
 	
-	public int checkTiles(Direction d, int xtile, int ytile, State[][] board, State Tile){
-		int newXTile = xtile, newYTile = ytile;
+	public int checkTiles(Direction d, int xtile, int ytile, State[][] board, State Tile){ 
+		
+		//recursively checks how many non-BLANK, adjacent tiles are the same and returns this 
+		
+		int newXTile = xtile, newYTile = ytile;											   	
 		int[] coordinates = new int[2];
 		
 		try{
@@ -77,6 +81,7 @@ public class Panel extends JPanel{
 	}
 	
 	public boolean checkWin(State[][] board, int xtile, int ytile){
+		//returns True if the method above returns 5 or more 
 		State tile = board[ytile][xtile];
 		
 		
