@@ -1,2 +1,2 @@
 # Gomoku
-a game of gomoku
+a game of gomoku by Haris Ahmad
